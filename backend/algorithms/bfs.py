@@ -10,7 +10,7 @@ Data structures:
 """
 
 from algorithms.utils import Grid, Position, SearchResult, get_neighbors, reconstruct_path
-
+from collections import deque
 
 def bfs(grid: Grid, start: Position, goal: Position) -> SearchResult:
     """Run BFS from `start` to `goal`.
@@ -31,4 +31,22 @@ def bfs(grid: Grid, start: Position, goal: Position) -> SearchResult:
       8.   record parent[neighbor] = current.
       9. Return SearchResult(visited, reconstruct_path(parent, start, goal)).
     """
-    raise NotImplementedError
+    queue = deque([start])
+    seen = {start}
+    visited = []
+    parent = {start: None}
+
+    while queue:
+        current = queue.popleft()
+        visited.append(current)
+
+        if current == goal:
+            break
+
+        for neighbor in get_neighbors(grid, current):
+            if neighbor not in seen:
+                seen.add(neighbor)
+                parent[neighbor] = current
+                queue.append(neighbor)
+
+    return SearchResult(visited, reconstruct_path(parent, start, goal))

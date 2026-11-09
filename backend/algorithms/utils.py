@@ -36,7 +36,15 @@ def is_valid(grid: Grid, position: Position) -> bool:
       1. Check the position is inside the maze boundaries.
       2. Check the position is not a wall.
     """
-    raise NotImplementedError
+
+    row, col = position
+
+    inside_boundaries = (
+        0 <= row < len(grid)
+        and 0 <= col < len(grid[row])
+    )
+
+    return inside_boundaries and grid[row][col] == OPEN
 
 
 def get_neighbors(grid: Grid, position: Position) -> list[Position]:
@@ -49,8 +57,15 @@ def get_neighbors(grid: Grid, position: Position) -> list[Position]:
 
     Both BFS and DFS MUST use this function - do not duplicate neighbor logic.
     """
-    raise NotImplementedError
 
+    valid_neighbors = []
+
+    for d_row, d_col in DIRECTIONS:
+        neighbor = (position[0] + d_row, position[1] + d_col)
+        if is_valid(grid, neighbor):
+            valid_neighbors.append(neighbor)
+        
+    return valid_neighbors
 
 def reconstruct_path(
     parent: dict[Position, Position | None], start: Position, goal: Position
@@ -63,4 +78,10 @@ def reconstruct_path(
       1. Walk backwards from `goal` following parent links until None.
       2. Reverse the list so it goes start -> goal.
     """
-    raise NotImplementedError
+    
+    path = []
+    current = goal
+    while current is not None:
+        path.append(current)
+        current = parent.get(current)
+    return list(reversed(path))
