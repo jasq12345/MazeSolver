@@ -1,11 +1,33 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/
+GET http://127.0.0.1:8000/api/health
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
+GET http://127.0.0.1:8000/api/maze/generate?rows=10&cols=10
 Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/api/solve/bfs
+Content-Type: application/json
+
+{
+  "grid": [[0, 0, 1], [1, 0, 1], [0, 0, 0]],
+  "start": [0, 0],
+  "goal": [2, 2]
+}
+
+###
+
+POST http://127.0.0.1:8000/api/solve/dfs
+Content-Type: application/json
+
+{
+  "grid": [[0, 0, 1], [1, 0, 1], [0, 0, 0]],
+  "start": [0, 0],
+  "goal": [2, 2]
+}
 
 ###
