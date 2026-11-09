@@ -9,14 +9,14 @@ Data structures:
   - List                      -> exploration order (for frontend animation)
 """
 
-from algorithms.utils import Grid, Position, get_neighbors, reconstruct_path
+from algorithms.utils import Grid, Position, SearchResult, get_neighbors, reconstruct_path
 
 
-def bfs(grid: Grid, start: Position, goal: Position) -> tuple[list[Position], list[Position]]:
+def bfs(grid: Grid, start: Position, goal: Position) -> SearchResult:
     """Run BFS from `start` to `goal`.
 
     Returns:
-        (visited, path)
+        SearchResult(visited, path)
         visited -> cells in the exact order they were explored
         path    -> shortest route start -> goal (maze is always solvable)
 
@@ -29,6 +29,6 @@ def bfs(grid: Grid, start: Position, goal: Position) -> tuple[list[Position], li
       6. For each cell in get_neighbors(grid, current):
       7.   if not seen -> mark seen, add to queue,
       8.   record parent[neighbor] = current.
-      9. Return (visited, reconstruct_path(parent, start, goal)).
+      9. Return SearchResult(visited, reconstruct_path(parent, start, goal)).
     """
     raise NotImplementedError

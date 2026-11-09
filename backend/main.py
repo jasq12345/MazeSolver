@@ -52,7 +52,8 @@ def solve_bfs(request: MazeRequest):
     """TODO (Backend 3):
       1. Receive the maze request.
       2. Run bfs() and measure execution time (time.perf_counter).
-      3. Compute visited_count and path_length.
+      3. From the SearchResult: visited_count = len(result.visited),
+         path_length = len(result.path).
       4. Return SolveResponse.
     """
     raise NotImplementedError

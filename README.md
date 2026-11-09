@@ -70,12 +70,14 @@ pytest                             # run tests
 | `is_valid` | `algorithms/utils.py` | `(grid, position)` | `bool` – inside grid and not a wall |
 | `get_neighbors` | `algorithms/utils.py` | `(grid, position)` | `list[Position]` – valid neighbors |
 | `reconstruct_path` | `algorithms/utils.py` | `(parent, start, goal)` | `list[Position]` – start→goal |
-| `bfs` | `algorithms/bfs.py` | `(grid, start, goal)` | `(visited, path)` |
-| `dfs` | `algorithms/dfs.py` | `(grid, start, goal)` | `(visited, path)` |
+| `bfs` | `algorithms/bfs.py` | `(grid, start, goal)` | `SearchResult` |
+| `dfs` | `algorithms/dfs.py` | `(grid, start, goal)` | `SearchResult` |
 | `generate_maze` | `maze/generator.py` | `(rows=20, cols=20, wall_density=0.3)` | `(grid, start, goal)` |
 
-`visited` = cells in the exact order they were explored (the frontend animates it).
-`path` = list of cells from start to goal.
+`SearchResult` (dataclass in `algorithms/utils.py`) has two fields:
+
+- `visited` = cells in the exact order they were explored (the frontend animates it).
+- `path` = list of cells from start to goal.
 
 **Every maze is solvable** – the generator guarantees a route, so there is no "goal not found" case to handle.
 

@@ -8,6 +8,8 @@ The graph is undirected, unweighted and not necessarily fully connected.
 Neighbors are computed on the fly - no adjacency list is built.
 """
 
+from dataclasses import dataclass
+
 # ---- Shared types (agreed interface - do not change without telling the team) ----
 Position = tuple[int, int]  # (row, col)
 Grid = list[list[int]]      # grid[row][col]
@@ -17,6 +19,14 @@ WALL = 1  # wall
 
 # Up, Down, Left, Right as (d_row, d_col)
 DIRECTIONS: list[Position] = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+
+@dataclass
+class SearchResult:
+    """What bfs() and dfs() return."""
+
+    visited: list[Position]  # cells in the exact order they were explored
+    path: list[Position]     # route start -> goal (maze is always solvable)
 
 
 def is_valid(grid: Grid, position: Position) -> bool:

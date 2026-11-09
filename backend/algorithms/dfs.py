@@ -12,14 +12,14 @@ Difference from BFS: uses a stack and removes the LAST element, so it goes
 deep before backtracking. DFS does NOT guarantee the shortest path.
 """
 
-from algorithms.utils import Grid, Position, get_neighbors, reconstruct_path
+from algorithms.utils import Grid, Position, SearchResult, get_neighbors, reconstruct_path
 
 
-def dfs(grid: Grid, start: Position, goal: Position) -> tuple[list[Position], list[Position]]:
+def dfs(grid: Grid, start: Position, goal: Position) -> SearchResult:
     """Run DFS from `start` to `goal`.
 
     Returns:
-        (visited, path)
+        SearchResult(visited, path)
         visited -> cells in the exact order they were explored
         path    -> a route start -> goal (not necessarily shortest; maze is always solvable)
 
@@ -32,7 +32,7 @@ def dfs(grid: Grid, start: Position, goal: Position) -> tuple[list[Position], li
       6. For each cell in get_neighbors(grid, current):
       7.   if not visited -> push to stack,
       8.   record parent[neighbor] = current.
-      9. Return (visited, reconstruct_path(parent, start, goal)).
+      9. Return SearchResult(visited, reconstruct_path(parent, start, goal)).
 
     Note: `visited` must reflect the real exploration order (frontend animates it).
     """
