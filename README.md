@@ -102,13 +102,13 @@ Each person works only in their own files. Work on your own branch (`backend-1/.
 
 Files: `algorithms/utils.py`, `algorithms/bfs.py`, `tests/test_bfs.py`
 
-- [ ] Implement `is_valid(grid, position)` – boundaries check + wall check
-- [ ] Implement `get_neighbors(grid, position)` – up/down/left/right using `DIRECTIONS` + `is_valid`
-- [ ] Implement `reconstruct_path(parent, start, goal)` – walk back from goal, reverse *(review with Backend 2)*
-- [ ] Implement `bfs(grid, start, goal)` with queue (`deque`), visited set, parent dict, visited-order list
-- [ ] BFS must return the **shortest** path
-- [ ] Write tests in `tests/test_bfs.py` (remove the skip marker): `is_valid`, `get_neighbors`, `reconstruct_path`, shortest path, start == goal
-- [ ] **Do first** – push `utils.py` early, Backend 2 depends on it
+- [x] Implement `is_valid(grid, position)` – boundaries check + wall check
+- [x] Implement `get_neighbors(grid, position)` – up/down/left/right using `DIRECTIONS` + `is_valid`
+- [x] Implement `reconstruct_path(parent, start, goal)` – walk back from goal, reverse *(review with Backend 2)*
+- [x] Implement `bfs(grid, start, goal)` with queue (`deque`), visited set, parent dict, visited-order list
+- [x] BFS must return the **shortest** path
+- [x] Write tests in `tests/test_bfs.py` (remove the skip marker): `is_valid`, `get_neighbors`, `reconstruct_path`, shortest path, start == goal
+- [x] **Do first** – push `utils.py` early, Backend 2 depends on it
 
 ### 👤 Backend 2 — DFS + testing
 
