@@ -69,13 +69,15 @@ pytest                             # run tests
 |---|---|---|---|
 | `is_valid` | `algorithms/utils.py` | `(grid, position)` | `bool` – inside grid and not a wall |
 | `get_neighbors` | `algorithms/utils.py` | `(grid, position)` | `list[Position]` – valid neighbors |
-| `reconstruct_path` | `algorithms/utils.py` | `(parent, start, goal)` | `list[Position]` – start→goal, `[]` if unreachable |
+| `reconstruct_path` | `algorithms/utils.py` | `(parent, start, goal)` | `list[Position]` – start→goal |
 | `bfs` | `algorithms/bfs.py` | `(grid, start, goal)` | `(visited, path)` |
 | `dfs` | `algorithms/dfs.py` | `(grid, start, goal)` | `(visited, path)` |
 | `generate_maze` | `maze/generator.py` | `(rows=20, cols=20, wall_density=0.3)` | `(grid, start, goal)` |
 
 `visited` = cells in the exact order they were explored (the frontend animates it).
-`path` = list of cells from start to goal, `[]` if the goal can't be reached.
+`path` = list of cells from start to goal.
+
+**Every maze is solvable** – the generator guarantees a route, so there is no "goal not found" case to handle.
 
 ## API
 
@@ -86,7 +88,7 @@ pytest                             # run tests
 | POST | `/api/solve/bfs` | `{grid, start, goal}` | `{visited, path, visited_count, path_length, execution_time_ms}` |
 | POST | `/api/solve/dfs` | `{grid, start, goal}` | same as BFS |
 
-`path_length` = number of cells in `path` (0 if unreachable).
+`path_length` = number of cells in `path`.
 
 ---
 
@@ -100,11 +102,10 @@ Files: `algorithms/utils.py`, `algorithms/bfs.py`, `tests/test_bfs.py`
 
 - [ ] Implement `is_valid(grid, position)` – boundaries check + wall check
 - [ ] Implement `get_neighbors(grid, position)` – up/down/left/right using `DIRECTIONS` + `is_valid`
-- [ ] Implement `reconstruct_path(parent, start, goal)` – walk back from goal, reverse; `[]` if unreachable *(review with Backend 2)*
+- [ ] Implement `reconstruct_path(parent, start, goal)` – walk back from goal, reverse *(review with Backend 2)*
 - [ ] Implement `bfs(grid, start, goal)` with queue (`deque`), visited set, parent dict, visited-order list
 - [ ] BFS must return the **shortest** path
-- [ ] Handle unreachable goal → `path == []`
-- [ ] Write tests in `tests/test_bfs.py` (remove the skip marker): `is_valid`, `get_neighbors`, `reconstruct_path`, shortest path, unreachable, start == goal
+- [ ] Write tests in `tests/test_bfs.py` (remove the skip marker): `is_valid`, `get_neighbors`, `reconstruct_path`, shortest path, start == goal
 - [ ] **Do first** – push `utils.py` early, Backend 2 depends on it
 
 ### 👤 Backend 2 — DFS + testing
@@ -114,8 +115,7 @@ Files: `algorithms/dfs.py`, `tests/test_dfs.py`
 - [ ] Implement `dfs(grid, start, goal)` with stack (list), visited set, parent dict, visited-order list
 - [ ] Use `get_neighbors` and `reconstruct_path` from `utils.py` (no duplicated neighbor logic)
 - [ ] `visited` must reflect the real exploration order (each cell only once)
-- [ ] Handle unreachable goal → `path == []`
-- [ ] Write tests in `tests/test_dfs.py` (remove the skip marker): path found, path is connected & avoids walls, no duplicate visits, unreachable, start == goal
+- [ ] Write tests in `tests/test_dfs.py` (remove the skip marker): path reaches goal, path is connected & avoids walls, no duplicate visits, start == goal
 - [ ] Review `reconstruct_path` together with Backend 1
 - [ ] Run the full test suite (`pytest`) before each merge
 

@@ -21,7 +21,7 @@ def dfs(grid: Grid, start: Position, goal: Position) -> tuple[list[Position], li
     Returns:
         (visited, path)
         visited -> cells in the exact order they were explored
-        path    -> a route start -> goal (not necessarily shortest), or [] if unreachable
+        path    -> a route start -> goal (not necessarily shortest; maze is always solvable)
 
     TODO (Backend 2):
       1. Initialize a stack containing the start position.

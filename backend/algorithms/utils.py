@@ -47,9 +47,10 @@ def reconstruct_path(
 ) -> list[Position]:
     """Rebuild the route from `start` to `goal` using the parent dictionary.
 
+    The maze is always solvable, so `goal` is guaranteed to be in `parent`.
+
     TODO (Backend 1, reviewed by Backend 2):
-      1. If `goal` is not in `parent`, return [] (destination unreachable).
-      2. Walk backwards from `goal` following parent links until None.
-      3. Reverse the list so it goes start -> goal.
+      1. Walk backwards from `goal` following parent links until None.
+      2. Reverse the list so it goes start -> goal.
     """
     raise NotImplementedError

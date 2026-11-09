@@ -18,7 +18,7 @@ def bfs(grid: Grid, start: Position, goal: Position) -> tuple[list[Position], li
     Returns:
         (visited, path)
         visited -> cells in the exact order they were explored
-        path    -> shortest route start -> goal, or [] if unreachable
+        path    -> shortest route start -> goal (maze is always solvable)
 
     TODO (Backend 1):
       1. Initialize a queue containing the start position.

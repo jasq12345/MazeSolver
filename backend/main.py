@@ -29,9 +29,9 @@ class MazeRequest(BaseModel):
 
 class SolveResponse(BaseModel):
     visited: list[tuple[int, int]]  # exploration order
-    path: list[tuple[int, int]]     # [] if unreachable
+    path: list[tuple[int, int]]     # start -> goal (maze is always solvable)
     visited_count: int
-    path_length: int                # number of cells in path, 0 if unreachable
+    path_length: int                # number of cells in path
     execution_time_ms: float
 
 

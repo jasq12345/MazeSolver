@@ -32,9 +32,5 @@ def test_bfs_finds_shortest_path():
     """TODO: path starts at start, ends at goal, and has minimal length."""
 
 
-def test_bfs_unreachable_goal():
-    """TODO: goal fully walled off -> path == []."""
-
-
 def test_bfs_start_equals_goal():
     """TODO: start == goal -> path == [start]."""

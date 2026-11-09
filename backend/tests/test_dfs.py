@@ -28,9 +28,5 @@ def test_dfs_visited_has_no_duplicates():
     """TODO: each cell appears at most once in visited."""
 
 
-def test_dfs_unreachable_goal():
-    """TODO: goal fully walled off -> path == []."""
-
-
 def test_dfs_start_equals_goal():
     """TODO: start == goal -> path == [start]."""
