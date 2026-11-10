@@ -10,7 +10,7 @@ export async function checkBackend() {
 }
 
 export async function getRandomMaze() {
-  const response = await fetch(`${API_BASE_URL}/api/maze/generate`);
+  const response = await fetch(`${API_BASE_URL}/api/maze/generate?row=${row}&?cols=${cols}&?wall_density=${wall_density}`);
   if (!response.ok) throw new Error('Failed to generate maze');
   return response.json();
 }
