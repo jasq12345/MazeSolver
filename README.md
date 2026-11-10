@@ -75,7 +75,7 @@ Adding a package: `uv add <package>` (or `uv add --dev <package>` for test-only 
 
 ### Frontend (React, Vite)
 
-Requires [Node.js](https://nodejs.org/) 18 or newer (comes with npm).
+Requires [Node.js](https://nodejs.org/) 20.19+ or 22.12+ (comes with npm) – needed by Vite 8.
 
 ```bash
 cd frontend
