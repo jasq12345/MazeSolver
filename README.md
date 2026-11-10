@@ -114,12 +114,12 @@ Files: `algorithms/utils.py`, `algorithms/bfs.py`, `tests/test_bfs.py`
 
 Files: `algorithms/dfs.py`, `tests/test_dfs.py`
 
-- [ ] Implement `dfs(grid, start, goal)` with stack (list), visited set, parent dict, visited-order list
-- [ ] Use `get_neighbors` and `reconstruct_path` from `utils.py` (no duplicated neighbor logic)
-- [ ] `visited` must reflect the real exploration order (each cell only once)
-- [ ] Write tests in `tests/test_dfs.py` (remove the skip marker): path reaches goal, path is connected & avoids walls, no duplicate visits, start == goal
-- [ ] Review `reconstruct_path` together with Backend 1
-- [ ] Run the full test suite (`pytest`) before each merge
+- [x] Implement `dfs(grid, start, goal)` with stack (list), visited set, parent dict, visited-order list
+- [x] Use `get_neighbors` and `reconstruct_path` from `utils.py` (no duplicated neighbor logic)
+- [x] `visited` must reflect the real exploration order (each cell only once)
+- [x] Write tests in `tests/test_dfs.py`: path reaches goal, path is connected & avoids walls, no duplicate visits, start == goal
+- [x] Review `reconstruct_path` together with Backend 1
+- [x] Run the full test suite (`pytest`) before each merge
 
 ### 👤 Backend 3 — FastAPI + maze generation
 
