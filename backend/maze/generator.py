@@ -3,7 +3,9 @@
 Owner: Backend 3
 """
 
-from algorithms.utils import Grid, Position
+import random
+
+from algorithms.utils import OPEN, WALL, Grid, Position
 
 
 def generate_maze(
@@ -16,12 +18,22 @@ def generate_maze(
         start -> top-left corner (0, 0)
         goal  -> bottom-right corner (rows - 1, cols - 1)
 
-    TODO (Backend 3):
-      1. Create a rows x cols matrix.
-      2. Randomly set each cell to WALL or OPEN (~wall_density walls).
-      3. Keep the first row fully open.
-      4. Keep the last column fully open.
-         (3 + 4 guarantee a route from top-left to bottom-right.)
-      5. Return (grid, (0, 0), (rows - 1, cols - 1)).
+    The first row and the last column are always open, so you can always walk
+    right along the top and then down the right side: the maze is solvable.
     """
-    raise NotImplementedError
+    if rows < 1 or cols < 1:
+        raise ValueError("rows and cols must be at least 1")
+    if not 0 <= wall_density <= 1:
+        raise ValueError("wall_density must be between 0 and 1")
+
+    grid = [
+        [WALL if random.random() < wall_density else OPEN for _ in range(cols)]
+        for _ in range(rows)
+    ]
+
+    for col in range(cols):  # first row open
+        grid[0][col] = OPEN
+    for row in range(rows):  # last column open
+        grid[row][cols - 1] = OPEN
+
+    return grid, (0, 0), (rows - 1, cols - 1)

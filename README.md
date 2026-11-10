@@ -92,6 +92,9 @@ pytest                             # run tests
 
 `path_length` = number of cells in `path`.
 
+`/api/maze/generate` limits: `rows` and `cols` 2–100, `wall_density` 0–0.9 (defaults 20, 20, 0.3); out of range → `422`.
+`/api/solve/*` returns `400` with `{"detail": "..."}` when the grid is empty/not rectangular/has values other than 0 and 1, when start or goal is outside the grid or on a wall, or when the maze can't be solved.
+
 ---
 
 ## Tasks
@@ -125,18 +128,19 @@ Files: `algorithms/dfs.py`, `tests/test_dfs.py`
 
 Files: `main.py`, `maze/generator.py`, `requirements.txt`, `test_main.http`
 
-- [ ] Set up environment: venv, `requirements.txt` (FastAPI, Uvicorn, Pytest), server runs with `--reload`
-- [ ] Implement `generate_maze(rows, cols, wall_density)`:
+- [x] Set up environment: venv, `requirements.txt` (FastAPI, Uvicorn, Pytest, httpx), server runs with `--reload`
+- [x] Implement `generate_maze(rows, cols, wall_density)`:
   - random walls ~30%
   - first row and last column always open (guarantees a route)
   - start = top-left `(0, 0)`, goal = bottom-right `(rows-1, cols-1)`
-- [ ] `GET /api/health` – return message that the server is running
-- [ ] `GET /api/maze/generate` – return grid, start, goal
-- [ ] `POST /api/solve/bfs` – run BFS, measure time (`time.perf_counter`), return visited, path, `visited_count`, `path_length`, `execution_time_ms`
-- [ ] `POST /api/solve/dfs` – same as BFS but with DFS
-- [ ] Configure CORS for the React dev server (confirm port with frontend)
-- [ ] Validate input (start/goal inside grid, grid not empty) – return 400 on bad input
-- [ ] Check everything works at `http://localhost:8000/docs` and with `test_main.http`
+- [x] `GET /api/health` – return message that the server is running
+- [x] `GET /api/maze/generate` – return grid, start, goal
+- [x] `POST /api/solve/bfs` – run BFS, measure time (`time.perf_counter`), return visited, path, `visited_count`, `path_length`, `execution_time_ms`
+- [x] `POST /api/solve/dfs` – same as BFS but with DFS
+- [x] Configure CORS for the React dev server (confirm port with frontend)
+- [x] Validate input (start/goal inside grid, grid not empty, start/goal not walls, maze solvable) – return 400 on bad input
+- [x] Check everything works at `http://localhost:8000/docs` and with `test_main.http`
+- [x] Tests: `tests/test_generator.py`, `tests/test_api.py`
 
 ## Suggested timeline (3 days)
 
