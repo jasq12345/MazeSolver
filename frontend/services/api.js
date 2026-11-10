@@ -26,7 +26,7 @@ export async function solveBFS(grid, start, goal) {
 }
 
 export async function solveDFS(grid, start, goal) {
-  const response = await fetch(`http://localhost:8000/api/solve/dfs`, {
+  const response = await fetch(`${API_BASE_URL}/api/solve/dfs`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ grid, start, goal }),
