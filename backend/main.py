@@ -13,8 +13,10 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from algorithms.astar import astar
 from algorithms.bfs import bfs
 from algorithms.dfs import dfs
+from algorithms.dijkstra import dijkstra
 from algorithms.utils import OPEN, WALL, Grid, Position, SearchResult
 from maze.generator import generate_maze
 
@@ -109,6 +111,16 @@ def solve_bfs(request: MazeRequest):
 @app.post("/api/solve/dfs", response_model=SolveResponse)
 def solve_dfs(request: MazeRequest):
     return solve(request, dfs)
+
+
+@app.post("/api/solve/dijkstra", response_model=SolveResponse)
+def solve_dijkstra(request: MazeRequest):
+    return solve(request, dijkstra)
+
+
+@app.post("/api/solve/astar", response_model=SolveResponse)
+def solve_astar(request: MazeRequest):
+    return solve(request, astar)
 
 
 @app.get("/api/maze/generate", response_model=MazeResponse)

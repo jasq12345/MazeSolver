@@ -43,7 +43,7 @@ def test_generate_rejects_bad_size():
     assert client.get("/api/maze/generate?rows=1000").status_code == 422
 
 
-@pytest.mark.parametrize("algorithm", ["bfs", "dfs"])
+@pytest.mark.parametrize("algorithm", ["bfs", "dfs", "dijkstra", "astar"])
 def test_solve_response_shape(algorithm):
     response = client.post(f"/api/solve/{algorithm}", json=MAZE)
     assert response.status_code == 200
@@ -60,7 +60,7 @@ def test_bfs_returns_shortest_path():
     assert data["path"] == [[0, 0], [0, 1], [1, 1], [2, 1], [2, 2]]
 
 
-@pytest.mark.parametrize("algorithm", ["bfs", "dfs"])
+@pytest.mark.parametrize("algorithm", ["bfs", "dfs", "dijkstra", "astar"])
 def test_solve_generated_maze(algorithm):
     maze = client.get("/api/maze/generate?rows=15&cols=15").json()
     response = client.post(f"/api/solve/{algorithm}", json=maze)
@@ -80,6 +80,6 @@ def test_solve_generated_maze(algorithm):
         {"grid": [[0, 1], [1, 0]], "start": [0, 0], "goal": [1, 1]},  # unsolvable
     ],
 )
-@pytest.mark.parametrize("algorithm", ["bfs", "dfs"])
+@pytest.mark.parametrize("algorithm", ["bfs", "dfs", "dijkstra", "astar"])
 def test_solve_rejects_bad_input(algorithm, body):
     assert client.post(f"/api/solve/{algorithm}", json=body).status_code == 400

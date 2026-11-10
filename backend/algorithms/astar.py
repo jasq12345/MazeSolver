@@ -40,11 +40,8 @@ def manhattan_distance(a: Position, b: Position) -> int:
     Examples:
         manhattan_distance((0, 0), (3, 4)) -> 7
         manhattan_distance((2, 2), (2, 2)) -> 0
-
-    TODO (Person 2):
-      1. Return abs(row_a - row_b) + abs(col_a - col_b).
     """
-    raise NotImplementedError
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 
 def astar(grid: Grid, start: Position, goal: Position) -> SearchResult:
@@ -79,4 +76,30 @@ def astar(grid: Grid, start: Position, goal: Position) -> SearchResult:
     Note: use get_neighbors and reconstruct_path from utils.py - do not write
     your own neighbor logic.
     """
-    raise NotImplementedError
+    h_start = manhattan_distance(start, goal)
+    heap: list[tuple[int, int, Position]] = [(h_start, h_start, start)]
+    g: dict[Position, int] = {start: 0}
+    parent: dict[Position, Position | None] = {start: None}
+    explored: set[Position] = set()
+    visited: list[Position] = []
+
+    while heap:
+        _, _, current = heapq.heappop(heap)
+
+        if current in explored:
+            continue
+        explored.add(current)
+        visited.append(current)
+
+        if current == goal:
+            break
+
+        for neighbor in get_neighbors(grid, current):
+            new_g = g[current] + 1
+            if new_g < g.get(neighbor, inf):
+                g[neighbor] = new_g
+                parent[neighbor] = current
+                h = manhattan_distance(neighbor, goal)
+                heapq.heappush(heap, (new_g + h, h, neighbor))
+
+    return SearchResult(visited, reconstruct_path(parent, start, goal))

@@ -12,8 +12,8 @@ The maze is treated as a **graph**: every walkable cell is a vertex, and neighbo
 |---|---|---|---|
 | BFS – Breadth-First Search | queue | ✅ yes | ✅ done |
 | DFS – Depth-First Search | stack | ❌ no | ✅ done |
-| Dijkstra | priority queue | ✅ yes | 🚧 in progress |
-| A* | priority queue + heuristic | ✅ yes | 🚧 in progress |
+| Dijkstra | priority queue | ✅ yes | ✅ done |
+| A* | priority queue + heuristic | ✅ yes | ✅ done |
 
 ## Tech stack
 

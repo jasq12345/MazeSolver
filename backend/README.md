@@ -26,15 +26,15 @@ backend/
 │   ├── utils.py          # shared types, is_valid, get_neighbors, reconstruct_path, SearchResult
 │   ├── bfs.py            # Breadth-First Search
 │   ├── dfs.py            # Depth-First Search
-│   ├── dijkstra.py       # Dijkstra            🚧 Person 1
-│   └── astar.py          # A*                  🚧 Person 2
+│   ├── dijkstra.py       # Dijkstra            ✅ Person 1
+│   └── astar.py          # A*                  ✅ Person 2
 ├── maze/
 │   └── generator.py      # random solvable maze
 └── tests/
     ├── test_bfs.py       # BFS + utils
     ├── test_dfs.py
-    ├── test_dijkstra.py  # 🚧 Person 1
-    ├── test_astar.py     # 🚧 Person 2
+    ├── test_dijkstra.py  # ✅ Person 1
+    ├── test_astar.py     # ✅ Person 2
     ├── test_generator.py
     └── test_api.py       # endpoint tests (FastAPI TestClient)
 ```
@@ -71,8 +71,8 @@ Don't change these without telling the team – every algorithm and the frontend
 | GET | `/api/maze/generate` | `?rows=&cols=&wall_density=` | `{grid, start, goal}` |
 | POST | `/api/solve/bfs` | `{grid, start, goal}` | `{visited, path, visited_count, path_length, execution_time_ms}` |
 | POST | `/api/solve/dfs` | `{grid, start, goal}` | same as above |
-| POST | `/api/solve/dijkstra` 🚧 | `{grid, start, goal}` | same as above |
-| POST | `/api/solve/astar` 🚧 | `{grid, start, goal}` | same as above |
+| POST | `/api/solve/dijkstra` | `{grid, start, goal}` | same as above |
+| POST | `/api/solve/astar` | `{grid, start, goal}` | same as above |
 
 - `path_length` = number of cells in `path`; `visited_count` = number of cells in `visited`; `execution_time_ms` = time of the algorithm only (not validation or JSON).
 - `/api/maze/generate` limits: `rows` and `cols` 2–100, `wall_density` 0–0.9 (defaults 20, 20, 0.3). Out of range → `422`.
