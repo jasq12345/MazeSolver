@@ -1,0 +1,26 @@
+.maze-grid {
+  --cell-size: 22px;
+  display: grid;
+  gap: 1px;
+  width: fit-content;
+  background: #999;
+  border: 1px solid #999;
+}
+
+.maze-grid.disabled .cell {
+  cursor: not-allowed;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.empty   { background: #ffffff; }
+.wall    { background: #444444; }
+.start   { background: #2e9e44; cursor: default; }
+.goal    { background: #e03131; cursor: default; }
+.visited { background: #a5d8ff; }
+.path    { background: #ffd43b; }
