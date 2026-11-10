@@ -27,8 +27,9 @@ MazeSolver/
 ├── frontend/
 └── backend/
     ├── main.py               # FastAPI app + endpoints          (Backend 3)
-    ├── requirements.txt
-    ├── pyproject.toml
+    ├── pyproject.toml        # dependencies (managed by uv)
+    ├── uv.lock               # exact versions – commit it
+    ├── requirements.txt      # pip fallback only
     ├── test_main.http        # manual API requests
     ├── algorithms/
     │   ├── __init__.py
@@ -41,24 +42,24 @@ MazeSolver/
     └── tests/
         ├── __init__.py
         ├── test_bfs.py       # BFS + utils tests                 (Backend 1)
-        └── test_dfs.py       # DFS tests                         (Backend 2)
+        ├── test_dfs.py       # DFS tests                         (Backend 2)
+        ├── test_generator.py # maze generator tests              (Backend 3)
+        └── test_api.py       # API endpoint tests                (Backend 3)
 ```
-
-Every file already contains the function signatures and a `TODO` list. Functions currently `raise NotImplementedError`.
 
 ## Setup
 
+We use [uv](https://docs.astral.sh/uv/getting-started/installation/) to manage Python and dependencies.
+
 ```bash
 cd backend
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+uv sync                            # creates .venv and installs everything (incl. pytest)
 
-uvicorn main:app --reload          # http://localhost:8000/docs
-pytest                             # run tests
+uv run uvicorn main:app --reload   # http://localhost:8000/docs
+uv run pytest                      # run tests
 ```
 
-(Using `uv`? `uv sync` then `uv run uvicorn main:app --reload`.)
+Adding a package: `uv add <package>` (or `uv add --dev <package>` for test-only tools), then commit `pyproject.toml` and `uv.lock`.
 
 ## Shared interfaces (agree before coding — don't change without telling the team)
 
@@ -122,13 +123,13 @@ Files: `algorithms/dfs.py`, `tests/test_dfs.py`
 - [x] `visited` must reflect the real exploration order (each cell only once)
 - [x] Write tests in `tests/test_dfs.py`: path reaches goal, path is connected & avoids walls, no duplicate visits, start == goal
 - [x] Review `reconstruct_path` together with Backend 1
-- [x] Run the full test suite (`pytest`) before each merge
+- [x] Run the full test suite (`uv run pytest`) before each merge
 
 ### 👤 Backend 3 — FastAPI + maze generation
 
 Files: `main.py`, `maze/generator.py`, `requirements.txt`, `test_main.http`
 
-- [x] Set up environment: venv, `requirements.txt` (FastAPI, Uvicorn, Pytest, httpx), server runs with `--reload`
+- [x] Set up environment with uv: `pyproject.toml` + `uv.lock` (FastAPI, Uvicorn; dev: pytest, httpx), server runs with `--reload`
 - [x] Implement `generate_maze(rows, cols, wall_density)`:
   - random walls ~30%
   - first row and last column always open (guarantees a route)
