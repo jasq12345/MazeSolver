@@ -140,6 +140,8 @@ Dijkstra always expands the cell with the **lowest total cost from the start** s
 
 Files: `algorithms/astar.py`, `tests/test_astar.py` (+ a few lines in `main.py`, `tests/test_api.py`, `test_main.http`)
 
+> 📝 **Skeleton ready:** `algorithms/astar.py` already has the function signatures, an explanation and a numbered TODO list inside each docstring – follow it step by step and replace `raise NotImplementedError`. `tests/test_astar.py` has every test name with a TODO describing what to check (remove the skip marker when you start).
+
 A* is Dijkstra with a sense of direction. It orders the priority queue by `f = g + h`:
 `g` = cost from start so far, `h` = **heuristic** estimate of the remaining distance to the goal.
 We use the **Manhattan distance** `|r1 - r2| + |c1 - c2|` – it never overestimates on a 4-direction grid, so A* still finds the shortest path, but it explores far fewer cells because it heads towards the goal.
@@ -152,7 +154,8 @@ We use the **Manhattan distance** `|r1 - r2| + |c1 - c2|` – it never overestim
 | Set `explored` | cells already finalized |
 | List `visited` | exploration order for the frontend |
 
-- [ ] Create `algorithms/astar.py` with `manhattan_distance(a, b) -> int` and `astar(grid, start, goal) -> SearchResult`
+- [ ] Implement `manhattan_distance(a, b) -> int` in `algorithms/astar.py`
+- [ ] Implement `astar(grid, start, goal) -> SearchResult` in `algorithms/astar.py`
 - [ ] Start with `heap = [(h(start), h(start), start)]`, `g = {start: 0}`, `parent = {start: None}`
 - [ ] Loop: `heappop`; if already in `explored` → skip; mark explored, append to `visited`, stop at the goal
 - [ ] For each cell from `get_neighbors`: `new_g = g[current] + 1`; if lower than `g.get(neighbor, inf)` → update `g`, `parent`, `heappush((new_g + h, h, neighbor))`
